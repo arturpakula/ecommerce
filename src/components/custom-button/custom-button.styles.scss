@@ -16,6 +16,7 @@ $google-color: #4258f4;
     font-weight: bolder;
     border: none;
     cursor: pointer;
+    justify-content: center;
   
     &:hover {
       background-color: white;
@@ -31,6 +32,14 @@ $google-color: #4258f4;
             background-color: $sub-google-color;
             border: none;
           }
+    }
+
+    &.invert {
+      filter: invert(100%);
+
+      &:hover {
+        filter: invert(0%);
+      }
     }
   }
   
