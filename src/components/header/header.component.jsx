@@ -6,7 +6,7 @@ import { auth } from '../../firebase/firebase.utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-const Header = ({ curentUser }) => (
+const Header = ({ currentUser }) => (
     <div className='header'>
         <Link className='logo-cointainer' to='/'>
             <Logo className='logo' />
@@ -15,9 +15,9 @@ const Header = ({ curentUser }) => (
             <Link className='option' to='/shop'>SHOP</Link>
             <Link className='option' to='/contact'>CONTACT</Link>
             {(() => {
-                if (curentUser === undefined) {
+                if (currentUser === undefined) {
                     return (<div className='option'><FontAwesomeIcon className='spinner' icon={faSpinner} /></div>)
-                } else if (curentUser === null) {
+                } else if (currentUser === null) {
                     return (<Link className='option' to='/sign'>SIGN IN</Link>)
                 } else {
                     return (<div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>)
@@ -27,8 +27,8 @@ const Header = ({ curentUser }) => (
     </div>
 )
 
-const mapStateToProps = state => ({
-    curentUser: state.user.curentUser
+const mapStateToProps = ({user}) => ({
+    currentUser: user.currentUser
 })
 
 export default connect(mapStateToProps)(Header);
