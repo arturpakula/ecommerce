@@ -5,8 +5,10 @@ import { ReactComponent as Logo } from '../../assets/crown.svg'
 import { auth } from '../../firebase/firebase.utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
     <div className='header'>
         <Link className='logo-cointainer' to='/'>
             <Logo className='logo' />
@@ -23,12 +25,15 @@ const Header = ({ currentUser }) => (
                     return (<div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>)
                 }
             })()}
+            <CartIcon />
         </div>
+        { hidden ? null : <CartDropdown />}
     </div>
 )
 
-const mapStateToProps = ({user}) => ({
-    currentUser: user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+    currentUser,
+    hidden
 })
 
 export default connect(mapStateToProps)(Header);
